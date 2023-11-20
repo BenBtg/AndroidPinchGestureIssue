@@ -8,10 +8,10 @@ public partial class MainPage : ContentPage
 		BindingContext = new MainViewModel();
 	}
 
-    void PinchGestureRecognizer_PinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
-    {
-		((sender as Image).Parent as ZoomImageContentView).OnPinchUpdated(sender, e);
-    }
+  //  void PinchGestureRecognizer_PinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
+  //  {
+		//((sender as Image).Parent as ZoomImageContentView).OnPinchUpdated(sender, e);
+  //  }
 }
 
 
