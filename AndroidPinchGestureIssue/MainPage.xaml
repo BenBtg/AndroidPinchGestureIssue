@@ -4,7 +4,7 @@
              x:DataType="androidpinchgestureissue:MainViewModel"
              x:Class="AndroidPinchGestureIssue.MainPage">
 
-      <ContentPage.Resources>
+  
 
         <!-- This works perfectly fine on iOS. Not at all on android.
           
@@ -19,24 +19,26 @@
 
         <!--This solution triggers the pinch on Android (not every time), but the pinch values are very random and does not represent the real pinch.-->
         <!--Also the pinch is triggered with just one finger which should not happen.-->
+        <Grid>
+            <!--<androidpinchgestureissue:ZoomImageContentView>
+            <androidpinchgestureissue:ZoomImageContentView.GestureRecognizers>
+                      
+             
+            </androidpinchgestureissue:ZoomImageContentView.GestureRecognizers>
+        -->
+        <androidpinchgestureissue:PinchToZoomContainer>
+        <Image Source="https://maui.graphics/images/dotnet-bot-painting.png"/>
+        </androidpinchgestureissue:PinchToZoomContainer>
 
-        <DataTemplate x:Key="StandaloneImageTemplate">
-            <androidpinchgestureissue:ZoomImageContentView>
-                <Image
-                    HeightRequest="500"
-                    Source="{Binding .}">
-                    <Image.GestureRecognizers>
-                        <PinchGestureRecognizer PinchUpdated="PinchGestureRecognizer_PinchUpdated"/>
-                    </Image.GestureRecognizers>
-                </Image>
-            </androidpinchgestureissue:ZoomImageContentView>
-        </DataTemplate>
 
-    </ContentPage.Resources>
 
-    <CarouselView Loop="False"
-                ItemsSource="{Binding Sources}"
-                ItemTemplate="{StaticResource StandaloneImageTemplate}" />
-    
+        <!--<BoxView Color="Transparent">
+            <View.GestureRecognizers>
+                           <PinchGestureRecognizer PinchUpdated="PinchGestureRecognizer_PinchUpdated"/>
+                </View.GestureRecognizers>
+            </BoxView>-->
+
+        </Grid>
+
 </ContentPage>
 

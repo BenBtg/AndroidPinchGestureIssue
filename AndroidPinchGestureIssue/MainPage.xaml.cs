@@ -10,7 +10,7 @@ public partial class MainPage : ContentPage
 
     void PinchGestureRecognizer_PinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
     {
-		((sender as Image).Parent as ZoomImageContentView).OnPinchUpdated(sender, e);
+		((sender as View).Parent as ZoomImageContentView).OnPinchUpdated(sender, e);
     }
 }
 
