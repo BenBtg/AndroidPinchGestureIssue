@@ -35,7 +35,7 @@ public partial class PinchBehavior : PlatformBehavior<MauiView, AndroidView>
     void ApplyScaleGestureDetector(AndroidView view)
     {
         view.Touch += ImageView_Touch;
-        mScaleGestureDetector = new ScaleGestureDetector(view.Context, new ScaleGestureListener(view));
+        mScaleGestureDetector = new ScaleGestureDetector(view.Context, new ScaleGestureListener(view, this));
     }
 
     void ClearScaleGestureDetector(AndroidView view)

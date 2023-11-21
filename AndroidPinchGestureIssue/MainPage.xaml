@@ -34,13 +34,14 @@
     <CarouselView Loop="False"
                   ItemsSource="{Binding Sources}"
                   ItemTemplate="{StaticResource StandaloneImageTemplate}" /> -->
-     <Grid>
-     <Grid.Behaviors>
-        <androidpinchgestureissue:PinchBehavior/>
-       </Grid.Behaviors>
-    <Image HeightRequest="500" Source="https://maui.graphics/images/dotnet-bot-painting.png">
-    
-    </Image>
+    <Grid>
+         <Grid.Behaviors>
+            <androidpinchgestureissue:PinchBehavior x:Name="ParentBehavior"/>
+         </Grid.Behaviors>
+
+        <Image HeightRequest="500" Source="https://maui.graphics/images/dotnet-bot-painting.png"
+               Scale="{Binding Source={x:Reference Name=ParentBehavior}, Path=PinchScale}">    
+        </Image>
 
     </Grid>
     <!--<Image.GestureRecognizers>
