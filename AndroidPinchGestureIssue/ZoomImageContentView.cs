@@ -70,7 +70,7 @@ namespace AndroidPinchGestureIssue
             }
 
             _tapGesture.Tapped += OnTapped;
-            Content.GestureRecognizers.Add(_tapGesture);
+            this.GestureRecognizers.Add(_tapGesture);
         }
 
         private void AddPanGesture()
@@ -81,7 +81,7 @@ namespace AndroidPinchGestureIssue
             }
 
             _panGesture.PanUpdated += OnPanUpdated;
-            Content.GestureRecognizers.Add(_panGesture);
+            this.GestureRecognizers.Add(_panGesture);
 
             if (Parent is CarouselView carouselView)
             {

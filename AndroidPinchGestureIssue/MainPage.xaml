@@ -4,39 +4,36 @@
              x:DataType="androidpinchgestureissue:MainViewModel"
              x:Class="AndroidPinchGestureIssue.MainPage">
 
-      <ContentPage.Resources>
-
-        <!-- This works perfectly fine on iOS. Not at all on android.
-          
+      <ContentPage.Resources>  
           <DataTemplate x:Key="StandaloneImageTemplate">
-            <androidpinchgestureissue:ZoomImageContentView>
+            <androidpinchgestureissue:PinchToZoomContainer>
                 <Image
                     HeightRequest="500"
                     Source="{Binding .}">
                 </Image>
-            </androidpinchgestureissue:ZoomImageContentView>
-        </DataTemplate>-->
+            </androidpinchgestureissue:PinchToZoomContainer>
+        </DataTemplate>
 
         <!--This solution triggers the pinch on Android (not every time), but the pinch values are very random and does not represent the real pinch.-->
         <!--Also the pinch is triggered with just one finger which should not happen.-->
 
-        <DataTemplate x:Key="StandaloneImageTemplate">
-            <androidpinchgestureissue:ZoomImageContentView>
+        <!--<DataTemplate x:Key="StandaloneImageTemplate">
+            <androidpinchgestureissue:PinchToZoomContainer>
                 <Image
                     HeightRequest="500"
                     Source="{Binding .}">
-                    <Image.GestureRecognizers>
-                        <PinchGestureRecognizer PinchUpdated="PinchGestureRecognizer_PinchUpdated"/>
-                    </Image.GestureRecognizers>
                 </Image>
-            </androidpinchgestureissue:ZoomImageContentView>
-        </DataTemplate>
+            </androidpinchgestureissue:PinchToZoomContainer>
+        </DataTemplate>-->
 
     </ContentPage.Resources>
-
+    <Grid>
     <CarouselView Loop="False"
+                  IsSwipeEnabled="False"
                 ItemsSource="{Binding Sources}"
                 ItemTemplate="{StaticResource StandaloneImageTemplate}" />
-    
+    <androidpinchgestureissue:GestureListenerView />
+    </Grid>
+
 </ContentPage>
 
