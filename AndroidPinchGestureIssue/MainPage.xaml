@@ -1,10 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:androidpinchgestureissue="clr-namespace:AndroidPinchGestureIssue"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:androidpinchgestureissue="clr-namespace:AndroidPinchGestureIssue"
              x:DataType="androidpinchgestureissue:MainViewModel"
-             x:Class="AndroidPinchGestureIssue.MainPage">
-
-      <ContentPage.Resources>
+             x:Class="AndroidPinchGestureIssue.MainPage" >
+    <!-- <ContentPage.Behaviors>
+        
+     </ContentPage.Behaviors> -->
 
         <!-- This works perfectly fine on iOS. Not at all on android.
           
@@ -15,28 +17,45 @@
                     Source="{Binding .}">
                 </Image>
             </androidpinchgestureissue:ZoomImageContentView>
-        </DataTemplate>-->
-
-        <!--This solution triggers the pinch on Android (not every time), but the pinch values are very random and does not represent the real pinch.-->
-        <!--Also the pinch is triggered with just one finger which should not happen.-->
-
-        <DataTemplate x:Key="StandaloneImageTemplate">
-            <androidpinchgestureissue:ZoomImageContentView>
-                <Image
-                    HeightRequest="500"
-                    Source="{Binding .}">
-                    <Image.GestureRecognizers>
-                        <PinchGestureRecognizer PinchUpdated="PinchGestureRecognizer_PinchUpdated"/>
-                    </Image.GestureRecognizers>
-                </Image>
-            </androidpinchgestureissue:ZoomImageContentView>
+        </DataTemplate> -->
+        <!-- This solution triggers the pinch on Android (not every time), but the pinch values are very random and does not represent the real pinch. -->
+        <!-- Also the pinch is triggered with just one finger which should not happen. -->
+    
+<ContentPage.Resources>
+         <DataTemplate x:Key="StandaloneImageTemplate">
+            <Grid>
+                 <Grid.Behaviors>
+                    <androidpinchgestureissue:PinchBehavior x:Name="ParentBehavior"/>
+                 </Grid.Behaviors>
+                 <Image HeightRequest="500"
+                       Source="{Binding .}"                       
+                       Scale="{Binding Source={x:Reference Name=ParentBehavior}, Path=PinchScale}"/>
+            </Grid>
         </DataTemplate>
-
     </ContentPage.Resources>
 
-    <CarouselView Loop="False"
-                ItemsSource="{Binding Sources}"
-                ItemTemplate="{StaticResource StandaloneImageTemplate}" />
-    
-</ContentPage>
+<Grid>
+    <CarouselView x:Name="cv"
+                 Loop="False"
+                  ItemsSource="{Binding Sources}"
+                  CurrentItemChanged="Cv_CurrentItemChanged"
+                  ItemTemplate="{StaticResource StandaloneImageTemplate}"/>
 
+    <Label Text="{Binding Source={x:Reference Name=cv}, Path=IsSwipeEnabled}"/>
+    </Grid>
+    <!--<Grid>
+         <Grid.Behaviors>
+            <androidpinchgestureissue:PinchBehavior x:Name="ParentBehavior"/>
+         </Grid.Behaviors>
+
+        <Image HeightRequest="500" Source="https://maui.graphics/images/dotnet-bot-painting.png"
+               Scale="{Binding Source={x:Reference Name=ParentBehavior}, Path=PinchScale}">    
+        </Image>
+
+    </Grid>-->
+    <!--<Image.GestureRecognizers>
+                    <PinchGestureRecognizer PinchUpdated="PinchGestureRecognizer_PinchUpdated" />
+                </Image.GestureRecognizers>-->
+
+
+</ContentPage>
