@@ -12,8 +12,8 @@ public partial class PinchBehavior
 
     public float PinchScale
     {
-       get => (float)GetValue(PinchScaleProperty);
-       set => SetValue(PinchScaleProperty, value);
+        get => (float)GetValue(PinchScaleProperty);
+        set => SetValue(PinchScaleProperty, value);
     }
 
 
@@ -22,7 +22,7 @@ public partial class PinchBehavior
 
     public bool SwipeEnabled
     {
-        get => (bool)GetValue(PinchScaleProperty);
-        set => SetValue(PinchScaleProperty, value);
+        get => (bool)GetValue(SwipeEnabledProperty);
+        set => SetValue(SwipeEnabledProperty, value);
     }
 }

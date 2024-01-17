@@ -56,15 +56,13 @@ public partial class PinchBehavior : PlatformBehavior<MauiView, AndroidView>
     {
         System.Diagnostics.Debug.WriteLine(e.PointerCount.ToString());
         System.Diagnostics.Debug.WriteLine(e.DownTime.ToString());
+
         var isTwoFingers = (e.DownTime != _lastDownTime);
         _lastDownTime = e.DownTime;
-
-       // if (isTwoFingers)
-        {
-            mScaleGestureDetector?.OnTouchEvent(e);
-        }
-
-
+       
+        mScaleGestureDetector?.OnTouchEvent(e);
+        SwipeEnabled = e.PointerCount == 1;
+        
         if (e.Action == MotionEventActions.Down)
         {
             Console.WriteLine("Touch event started at X: " + e.GetX() + ", Y: " + e.GetY());

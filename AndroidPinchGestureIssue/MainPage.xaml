@@ -20,25 +20,29 @@
         </DataTemplate> -->
         <!-- This solution triggers the pinch on Android (not every time), but the pinch values are very random and does not represent the real pinch. -->
         <!-- Also the pinch is triggered with just one finger which should not happen. -->
+    
 <ContentPage.Resources>
          <DataTemplate x:Key="StandaloneImageTemplate">
             <Grid>
                  <Grid.Behaviors>
                     <androidpinchgestureissue:PinchBehavior x:Name="ParentBehavior"/>
                  </Grid.Behaviors>
-                <Image HeightRequest="500"
+                 <Image HeightRequest="500"
                        Source="{Binding .}"                       
-                       Scale="{Binding Source={x:Reference Name=ParentBehavior}, Path=PinchScale}"
-                      androidpinchgestureissue:SwiperProperties.EnableSwipe = "True"/>
-                    <!--//"{Binding Source={x:Reference Name=ParentBehavior}, Path=SwipeEnabled}">-->
-                
+                       Scale="{Binding Source={x:Reference Name=ParentBehavior}, Path=PinchScale}"/>
             </Grid>
         </DataTemplate>
     </ContentPage.Resources>
-    <CarouselView Loop="False"
-                  IsSwipeEnabled="{Binding Source=CurrentItem, Path=EnableSwipe, Mode=TwoWay}"
+
+<Grid>
+    <CarouselView x:Name="cv"
+                 Loop="False"
                   ItemsSource="{Binding Sources}"
+                  CurrentItemChanged="Cv_CurrentItemChanged"
                   ItemTemplate="{StaticResource StandaloneImageTemplate}"/>
+
+    <Label Text="{Binding Source={x:Reference Name=cv}, Path=IsSwipeEnabled}"/>
+    </Grid>
     <!--<Grid>
          <Grid.Behaviors>
             <androidpinchgestureissue:PinchBehavior x:Name="ParentBehavior"/>
