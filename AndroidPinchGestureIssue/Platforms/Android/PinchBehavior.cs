@@ -12,6 +12,7 @@ namespace AndroidPinchGestureIssue;
 public partial class PinchBehavior : PlatformBehavior<MauiView, AndroidView>
 {
     private ScaleGestureDetector mScaleGestureDetector;
+    private long _lastDownTime;
 
     protected override void OnAttachedTo(MauiView bindable, AndroidView platformView)
     {
@@ -48,11 +49,22 @@ public partial class PinchBehavior : PlatformBehavior<MauiView, AndroidView>
     {
         LogTouchEvent(e.Event);
 
-        mScaleGestureDetector?.OnTouchEvent(e.Event);
+       // mScaleGestureDetector?.OnTouchEvent(e.Event);
     }
 
     private void LogTouchEvent(MotionEvent e)
     {
+        System.Diagnostics.Debug.WriteLine(e.PointerCount.ToString());
+        System.Diagnostics.Debug.WriteLine(e.DownTime.ToString());
+        var isTwoFingers = (e.DownTime != _lastDownTime);
+        _lastDownTime = e.DownTime;
+
+       // if (isTwoFingers)
+        {
+            mScaleGestureDetector?.OnTouchEvent(e);
+        }
+
+
         if (e.Action == MotionEventActions.Down)
         {
             Console.WriteLine("Touch event started at X: " + e.GetX() + ", Y: " + e.GetY());

@@ -16,4 +16,13 @@ public partial class PinchBehavior
        set => SetValue(PinchScaleProperty, value);
     }
 
+
+    public static readonly BindableProperty SwipeEnabledProperty =
+   BindableProperty.Create(nameof(SwipeEnabled), typeof(bool), typeof(PinchBehavior), true);
+
+    public bool SwipeEnabled
+    {
+        get => (bool)GetValue(PinchScaleProperty);
+        set => SetValue(PinchScaleProperty, value);
+    }
 }

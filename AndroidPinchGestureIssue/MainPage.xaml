@@ -20,21 +20,26 @@
         </DataTemplate> -->
         <!-- This solution triggers the pinch on Android (not every time), but the pinch values are very random and does not represent the real pinch. -->
         <!-- Also the pinch is triggered with just one finger which should not happen. -->
-        <!-- <DataTemplate x:Key="StandaloneImageTemplate">
-            <androidpinchgestureissue:ZoomImageContentView>
+<ContentPage.Resources>
+         <DataTemplate x:Key="StandaloneImageTemplate">
+            <Grid>
+                 <Grid.Behaviors>
+                    <androidpinchgestureissue:PinchBehavior x:Name="ParentBehavior"/>
+                 </Grid.Behaviors>
                 <Image HeightRequest="500"
-                       Source="{Binding .}">
-                    <Image.GestureRecognizers>
-                        <PinchGestureRecognizer PinchUpdated="PinchGestureRecognizer_PinchUpdated" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </androidpinchgestureissue:ZoomImageContentView>
+                       Source="{Binding .}"                       
+                       Scale="{Binding Source={x:Reference Name=ParentBehavior}, Path=PinchScale}"
+                      androidpinchgestureissue:SwiperProperties.EnableSwipe = "True"/>
+                    <!--//"{Binding Source={x:Reference Name=ParentBehavior}, Path=SwipeEnabled}">-->
+                
+            </Grid>
         </DataTemplate>
     </ContentPage.Resources>
     <CarouselView Loop="False"
+                  IsSwipeEnabled="{Binding Source=CurrentItem, Path=EnableSwipe, Mode=TwoWay}"
                   ItemsSource="{Binding Sources}"
-                  ItemTemplate="{StaticResource StandaloneImageTemplate}" /> -->
-    <Grid>
+                  ItemTemplate="{StaticResource StandaloneImageTemplate}"/>
+    <!--<Grid>
          <Grid.Behaviors>
             <androidpinchgestureissue:PinchBehavior x:Name="ParentBehavior"/>
          </Grid.Behaviors>
@@ -43,7 +48,7 @@
                Scale="{Binding Source={x:Reference Name=ParentBehavior}, Path=PinchScale}">    
         </Image>
 
-    </Grid>
+    </Grid>-->
     <!--<Image.GestureRecognizers>
                     <PinchGestureRecognizer PinchUpdated="PinchGestureRecognizer_PinchUpdated" />
                 </Image.GestureRecognizers>-->
